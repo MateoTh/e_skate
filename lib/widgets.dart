@@ -1,3 +1,4 @@
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -34,5 +35,29 @@ Widget listTileYoutube(String idVideo, String name, String author) {
         throw 'Could not launch www.youtube.com/watch?v=$idVideo';
       }
     },
+  );
+}
+
+Widget imagesCarousel(List<String> images, double height) {
+  return CarouselSlider(
+    options: CarouselOptions(
+      height: height,
+      aspectRatio: 2.0,
+      enlargeCenterPage: true,
+    ),
+    items: images
+        .map((item) => Container(
+              child: Container(
+                margin: EdgeInsets.all(5.0),
+                child: ClipRRect(
+                    borderRadius: BorderRadius.all(Radius.circular(5.0)),
+                    child: Stack(
+                      children: <Widget>[
+                        Image.network(item, fit: BoxFit.cover, width: 1000.0),
+                      ],
+                    )),
+              ),
+            ))
+        .toList(),
   );
 }

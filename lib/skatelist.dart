@@ -48,7 +48,7 @@ Widget cardSkate(Skate skate, BuildContext context) {
         Expanded(
             child: ClipRRect(
                 borderRadius: BorderRadius.circular(8.0),
-                child: Image.network(skate.url))),
+                child: Image.network(skate.urls[0]))),
         const SizedBox(height: 3),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,

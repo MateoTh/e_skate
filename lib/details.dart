@@ -20,11 +20,7 @@ class _DetailsState extends State<Details> {
         body: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Container(
-                margin: const EdgeInsets.all(20),
-                child: ClipRRect(
-                    borderRadius: BorderRadius.circular(8.0),
-                    child: Image.network(widget.skate.url))),
+            imagesCarousel(widget.skate.urls, 300),
             Row(mainAxisAlignment: MainAxisAlignment.spaceAround, children: [
               Row(children: [
                 const Icon(Icons.speed),
