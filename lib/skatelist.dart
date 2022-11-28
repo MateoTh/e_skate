@@ -53,13 +53,13 @@ Widget cardSkate(Skate skate, BuildContext context) {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
-            GetNote(
+            getNote(
                 skate.rate, Icons.star_rounded, Icons.star_outline_rounded, 15),
             Row(
               children: [
                 Text(skate.price.toString(),
                     style: const TextStyle(fontWeight: FontWeight.bold)),
-                const Icon(Icons.euro_rounded, size: 10)
+                const Icon(Icons.attach_money, size: 15)
               ],
             )
           ],

@@ -1,4 +1,5 @@
 import 'package:e_skate/objects/skate.dart';
+import 'package:e_skate/objects/video.dart';
 import 'package:e_skate/widgets.dart';
 import 'package:flutter/material.dart';
 
@@ -24,8 +25,6 @@ class _DetailsState extends State<Details> {
                 child: ClipRRect(
                     borderRadius: BorderRadius.circular(8.0),
                     child: Image.network(widget.skate.url))),
-            GetNote(widget.skate.rate, Icons.star_rounded,
-                Icons.star_outline_rounded, 50),
             Row(mainAxisAlignment: MainAxisAlignment.spaceAround, children: [
               Row(children: [
                 const Icon(Icons.speed),
@@ -38,11 +37,23 @@ class _DetailsState extends State<Details> {
                     style: const TextStyle(fontWeight: FontWeight.bold))
               ]),
               Row(children: [
+                const Icon(Icons.attach_money),
                 Text('${widget.skate.price}',
-                    style: const TextStyle(fontWeight: FontWeight.bold)),
-                const Icon(Icons.euro, size: 10)
+                    style: const TextStyle(fontWeight: FontWeight.bold))
               ])
-            ])
+            ]),
+            Divider(),
+            Expanded(
+              child: ListView.builder(
+                  itemCount: VideoList_Mock.length,
+                  itemBuilder: ((context, index) {
+                    return listTileYoutube(
+                        VideoList_Mock[index].urlId,
+                        VideoList_Mock[index].name,
+                        VideoList_Mock[index].author);
+                  }),
+                  padding: const EdgeInsets.all(8)),
+            )
           ],
         ));
   }

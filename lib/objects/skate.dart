@@ -19,7 +19,7 @@ List<Skate> SkateList_Mock = [
       'Backfire',
       46,
       30,
-      599,
+      699,
       4.86),
   Skate(
       'https://cdn.shopify.com/s/files/1/3006/5642/products/backfire-g3-31_510x@2x.progressive.jpg?v=1629295255',
@@ -27,7 +27,7 @@ List<Skate> SkateList_Mock = [
       'Backfire',
       46,
       30,
-      549,
+      649,
       3.5),
   Skate(
       'https://cdn.shopify.com/s/files/1/3006/5642/products/hammer-s-5_510x@2x.progressive.jpg?v=1653015484',
