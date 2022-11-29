@@ -1,4 +1,5 @@
 import 'package:e_skate/discover.dart';
+import 'package:e_skate/profile.dart';
 import 'package:e_skate/search.dart';
 import 'package:e_skate/skatelist.dart';
 import 'package:flutter/material.dart';
@@ -53,6 +54,16 @@ class _HomeState extends State<Home> {
     return Scaffold(
       appBar: AppBar(
         title: const Text("E-Skates"),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.person),
+            tooltip: 'Profile',
+            onPressed: () {
+              Navigator.push(
+                  context, MaterialPageRoute(builder: (context) => Profile()));
+            },
+          ),
+        ],
       ),
       body: _displayPage.elementAt(_selectedIndex),
       bottomNavigationBar: BottomNavigationBar(
