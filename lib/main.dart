@@ -73,8 +73,7 @@ class _HomeState extends State<Home> {
           BottomNavigationBarItem(
               icon: Icon(Icons.skateboarding), label: 'List'),
           BottomNavigationBarItem(icon: Icon(Icons.search), label: 'Search'),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.task_alt), label: 'Discover'),
+          BottomNavigationBarItem(icon: Icon(Icons.map), label: 'Map'),
         ],
         currentIndex: _selectedIndex,
         selectedItemColor: const Color(0xffFF914D),
