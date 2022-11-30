@@ -12,6 +12,7 @@ dependencies:
   cupertino_icons: ^1.0.2
   url_launcher: ^6.1.7
   carousel_slider: ^4.1.1
+  flutter_native_splash: ^2.2.16
 
 dev_dependencies:
   flutter_test:
@@ -21,3 +22,13 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
+
+flutter_native_splash:
+  color: "#42a5f5"
+  image: assets/logo.png
+  
+  android_12:
+    color: "#FF914D"
+    image: assets/logo.png
+    image_dark: assets/logo.png
+    color_dark: "#FF914D"
