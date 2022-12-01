@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_polyline_points/flutter_polyline_points.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -11,10 +13,8 @@ class Discover extends StatefulWidget {
 
 class _DiscoverState extends State<Discover> {
   late GoogleMapController mapController;
-  PolylinePoints polylinePoints = PolylinePoints();
   Map<String, Marker> _markers = {};
   Map<String, Polyline> _polylines = {};
-  List<LatLng> polylineCoordinates = [];
 
   @override
   Widget build(BuildContext context) {
@@ -24,9 +24,13 @@ class _DiscoverState extends State<Discover> {
             const CameraPosition(target: LatLng(43.610769, 3.876716), zoom: 14),
         onMapCreated: ((controller) {
           mapController = controller;
-          addMarkers();
+          //addMarkers();
           //addPolylines();
-          _getPolyline();
+          _getPolyline(const LatLng(43.60837552165201, 3.8968119408250335),
+              const LatLng(43.527684981571575, 3.932344557581942), "plage");
+
+          _getPolyline(const LatLng(43.63422142078255, 3.9189989554301183),
+              const LatLng(43.60735420911202, 3.8685841120620483), "claire");
         }),
         markers: _markers.values.toSet(),
         polylines: _polylines.values.toSet(),
@@ -52,30 +56,28 @@ class _DiscoverState extends State<Discover> {
     setState(() {});
   }
 
-  _getPolyline() async {
-    PolylineResult result = await polylinePoints.getRouteBetweenCoordinates(
+  _getPolyline(LatLng depart, LatLng arrivee, String id) async {
+    List<LatLng> polylineCoordinates = [];
+    PolylineResult result = await PolylinePoints().getRouteBetweenCoordinates(
       "AIzaSyAVLVVzcJ7hUVj5HsmibmoRhNHAdnVQXaA",
-      PointLatLng(43.592886861946546, 3.9055549122740523),
-      PointLatLng(43.61089552994617, 3.881532498367065),
-      travelMode: TravelMode.driving,
-      //wayPoints: [PolylineWayPoint(location: "Sabo, Yaba Lagos Nigeria")]
+      PointLatLng(depart.latitude, depart.longitude),
+      PointLatLng(arrivee.latitude, arrivee.longitude),
+      travelMode: TravelMode.bicycling,
     );
+
     if (result.points.isNotEmpty) {
       result.points.forEach((PointLatLng point) {
         polylineCoordinates.add(LatLng(point.latitude, point.longitude));
       });
     }
-    _addPolyLine();
-  }
 
-  _addPolyLine() {
-    PolylineId id = PolylineId("poly");
     Polyline polyline = Polyline(
-        polylineId: id,
+        polylineId: PolylineId(id),
         color: const Color(0xffFF914D),
         points: polylineCoordinates,
         width: 3);
-    _polylines[id.value] = polyline;
+    _polylines[id] = polyline;
+
     setState(() {});
   }
 }
