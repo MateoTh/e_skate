@@ -4,14 +4,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_polyline_points/flutter_polyline_points.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
-class Discover extends StatefulWidget {
-  const Discover({super.key});
+class MapPage extends StatefulWidget {
+  const MapPage({super.key});
 
   @override
-  State<Discover> createState() => _DiscoverState();
+  State<MapPage> createState() => _MapPageState();
 }
 
-class _DiscoverState extends State<Discover> {
+class _MapPageState extends State<MapPage> {
   late GoogleMapController mapController;
   Map<String, Marker> _markers = {};
   Map<String, Polyline> _polylines = {};

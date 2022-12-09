@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 
-class Search extends StatefulWidget {
-  const Search({super.key});
+class SearchPage extends StatefulWidget {
+  const SearchPage({super.key});
 
   @override
-  State<Search> createState() => _SearchState();
+  State<SearchPage> createState() => _SearchPageState();
 }
 
-class _SearchState extends State<Search> {
+class _SearchPageState extends State<SearchPage> {
   @override
   Widget build(BuildContext context) {
     return const Center(child: Text('Search'));
