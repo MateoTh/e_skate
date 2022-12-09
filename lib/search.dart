@@ -10,114 +10,58 @@ class Search extends StatefulWidget {
 }
 
 class _SearchState extends State<Search> {
-  int _currentForm = 0;
-
-  static final List<Widget> _displayForm = <Widget>[
-    vehiculeForm(),
-    budjetForm(),
-  ];
+  int currentForm = 0;
 
   @override
   Widget build(BuildContext context) {
-    return _displayForm.elementAt(_currentForm);
+    List<Widget> forms = getForms();
+    return forms.elementAt(currentForm);
   }
-}
 
-void nextForm() {
-  //_currentForm += 1;
-}
+  List<Widget> getForms() {
+    return [
+      vehiculeForm(),
+      budjetForm(),
+    ];
+  }
 
-Widget vehiculeForm() {
-  return ListView(
-    children: [
-      ListTile(
-        title: const Text("Skateboards"),
-        leading: const Icon(Icons.skateboarding),
-        trailing: const Icon(
-          Icons.arrow_forward_ios,
-          size: 15,
-        ),
-        onTap: () => {nextForm()},
-      ),
-      ListTile(
-        title: const Text("OneWeels"),
-        leading: const Icon(Icons.circle),
-        trailing: const Icon(
-          Icons.arrow_forward_ios,
-          size: 15,
-        ),
-        onTap: () => {nextForm()},
-      ),
-      ListTile(
-        title: const Text("Unicyles"),
-        leading: const Icon(Icons.circle),
-        trailing: const Icon(
-          Icons.arrow_forward_ios,
-          size: 15,
-        ),
-        onTap: () => {nextForm()},
-      ),
-      ListTile(
-        title: const Text("Scooters"),
-        leading: const Icon(Icons.electric_scooter),
-        trailing: const Icon(
-          Icons.arrow_forward_ios,
-          size: 15,
-        ),
-        onTap: () => {nextForm()},
-      ),
-      ListTile(
-        title: const Text("Bikes"),
-        leading: const Icon(Icons.electric_bike),
-        trailing: const Icon(
-          Icons.arrow_forward_ios,
-          size: 15,
-        ),
-        onTap: () => {nextForm()},
-      ),
-    ],
-  );
-}
+  void nextForm() {
+    if (currentForm + 1 < getForms().length) currentForm += 1;
+    setState(() {});
+  }
 
-Widget budjetForm() {
-  return ListView(
-    children: [
-      ListTile(
-        title: const Text("- 300 €"),
-        leading: const Icon(Icons.star_border),
-        trailing: const Icon(
-          Icons.arrow_forward_ios,
-          size: 15,
-        ),
-        onTap: () => {nextForm()},
+  Widget vehiculeForm() {
+    return ListView(
+      children: [
+        FilterListTile('Skateboards', const Icon(Icons.skateboarding)),
+        FilterListTile('OneWeels', const Icon(Icons.circle)),
+        FilterListTile('Unicyles', const Icon(Icons.circle)),
+        FilterListTile('Scooters', const Icon(Icons.electric_scooter)),
+        FilterListTile('Bikes', const Icon(Icons.electric_bike)),
+      ],
+    );
+  }
+
+  Widget budjetForm() {
+    return ListView(
+      children: [
+        FilterListTile('000 / 300 €', const Icon(Icons.star_border)),
+        FilterListTile('300 / 600 €', const Icon(Icons.star)),
+        FilterListTile('600 / 900 €', const Icon(Icons.sunny_snowing)),
+        FilterListTile('900 / +++ €', const Icon(Icons.sunny)),
+      ],
+    );
+  }
+
+  Widget FilterListTile(String text, Icon icon) {
+    return ListTile(
+      title: Text(text),
+      leading: icon,
+      trailing: const Icon(
+        Icons.arrow_forward_ios,
+        size: 15,
       ),
-      ListTile(
-        title: const Text("300 / 600 €"),
-        leading: const Icon(Icons.star),
-        trailing: const Icon(
-          Icons.arrow_forward_ios,
-          size: 15,
-        ),
-        onTap: () => {nextForm()},
-      ),
-      ListTile(
-        title: const Text("600 / 900 €"),
-        leading: const Icon(Icons.sunny_snowing),
-        trailing: const Icon(
-          Icons.arrow_forward_ios,
-          size: 15,
-        ),
-        onTap: () => {nextForm()},
-      ),
-      ListTile(
-        title: const Text("+ 900 €"),
-        leading: const Icon(Icons.sunny),
-        trailing: const Icon(
-          Icons.arrow_forward_ios,
-          size: 15,
-        ),
-        onTap: () => {nextForm()},
-      )
-    ],
-  );
+      onTap: () => {nextForm()},
+    );
+  }
 }
