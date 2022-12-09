@@ -48,3 +48,11 @@ List<Skate> SkateList_Mock = [
     'https://cdn.shopify.com/s/files/1/0015/7374/8789/products/TeamgeeH20ElectricSkateboardLongboard_BestChoiceforCommuteProductImage_8_720x.png?v=1667984602'
   ], 'H20', 'TeamGee', 40, 30, 399, 4.4),
 ];
+
+List<String> BrandList_Mock = [
+  'Backfire',
+  'Ownboard',
+  'Teamgee',
+  'WowGo',
+  'Elwing'
+];

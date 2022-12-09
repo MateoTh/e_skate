@@ -1,6 +1,6 @@
 import 'package:e_skate/objects/skate.dart';
 import 'package:e_skate/objects/video.dart';
-import 'package:e_skate/widgets.dart';
+import 'package:e_skate/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 
 class Details extends StatefulWidget {

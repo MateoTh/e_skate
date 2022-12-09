@@ -1,7 +1,8 @@
-import 'package:e_skate/discover.dart';
+import 'package:e_skate/pages/home_page.dart';
+import 'package:e_skate/pages/map_page.dart';
+import 'package:e_skate/pages/search_page.dart';
 import 'package:e_skate/profile.dart';
-import 'package:e_skate/search.dart';
-import 'package:e_skate/skatelist.dart';
+import 'package:e_skate/widgets/skatelist.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -44,9 +45,9 @@ class _HomeState extends State<Home> {
   }
 
   static const List<Widget> _displayPage = <Widget>[
-    SkateList(),
-    Search(),
-    Discover(),
+    HomePage(),
+    SearchPage(),
+    MapPage(),
   ];
 
   @override
@@ -59,8 +60,8 @@ class _HomeState extends State<Home> {
             icon: const Icon(Icons.person),
             tooltip: 'Profile',
             onPressed: () {
-              Navigator.push(
-                  context, MaterialPageRoute(builder: (context) => Profile()));
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => const Profile()));
             },
           ),
         ],
