@@ -24,6 +24,28 @@ class _SkateListState extends State<SkateList> {
             color: Color(0xffFF914D),
           );
         }
+        if (snapshot.data!.docs.isEmpty) {
+          return Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Container(
+                margin: const EdgeInsets.only(bottom: 20),
+                width: 100,
+                height: 100,
+                decoration: BoxDecoration(
+                    image: const DecorationImage(
+                        image: AssetImage('assets/logo.png')),
+                    border: Border.all(color: Colors.white, width: 5),
+                    borderRadius: BorderRadius.circular(100)),
+              ),
+              const Center(
+                  child: Text(
+                'No result',
+                style: TextStyle(fontWeight: FontWeight.bold),
+              )),
+            ],
+          );
+        }
         return GridView.count(
           shrinkWrap: true,
           physics: const ClampingScrollPhysics(),
