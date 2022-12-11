@@ -3,11 +3,14 @@ import 'package:e_skate/pages/map_page.dart';
 import 'package:e_skate/pages/search_page.dart';
 import 'package:e_skate/profile.dart';
 import 'package:e_skate/widgets/skatelist.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:e_skate/sharded/global.dart' as globals;
 
-void main() {
+Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp])
       .then((value) => runApp(MyApp()));
 }
@@ -77,7 +80,7 @@ class _HomeState extends State<Home> {
           BottomNavigationBarItem(icon: Icon(Icons.map), label: 'Map'),
         ],
         currentIndex: _selectedIndex,
-        selectedItemColor: const Color(0xffFF914D),
+        selectedItemColor: globals.globalColor,
         onTap: _onItemTapped,
       ),
     );

@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "64029444217",
+    "project_id": "e-skate-ee69e",
+    "storage_bucket": "e-skate-ee69e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:64029444217:android:ece28bbef017cb1b1c6ca8",
+        "android_client_info": {
+          "package_name": "com.example.e_skate"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "64029444217-si6c4dm423ievj3g15f22o5f1h2vf7v4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC99cUShiscVvWunFBWZDEBJiwwrI_tPOA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "64029444217-si6c4dm423ievj3g15f22o5f1h2vf7v4.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

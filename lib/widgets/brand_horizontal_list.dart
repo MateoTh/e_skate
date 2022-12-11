@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:e_skate/sharded/global.dart' as globals;
 
 class BrandHorizontalList extends StatelessWidget {
   const BrandHorizontalList({super.key});
@@ -35,7 +36,7 @@ class BrandHorizontalList extends StatelessWidget {
           width: 70,
           decoration: BoxDecoration(
               border: Border.all(color: Colors.white, width: 3),
-              color: const Color(0xffFF914D),
+              color: globals.globalColor,
               borderRadius: BorderRadius.circular(50)),
           child: Center(
             child: Text(

@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_polyline_points/flutter_polyline_points.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:e_skate/sharded/global.dart' as globals;
 
 class MapPage extends StatefulWidget {
   const MapPage({super.key});
@@ -73,7 +74,7 @@ class _MapPageState extends State<MapPage> {
 
     Polyline polyline = Polyline(
         polylineId: PolylineId(id),
-        color: const Color(0xffFF914D),
+        color: globals.globalColor,
         points: polylineCoordinates,
         width: 3);
     _polylines[id] = polyline;

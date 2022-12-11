@@ -2,6 +2,7 @@ import 'package:e_skate/objects/skate.dart';
 import 'package:e_skate/objects/video.dart';
 import 'package:e_skate/widgets/widgets.dart';
 import 'package:flutter/material.dart';
+import 'package:e_skate/sharded/global.dart' as globals;
 
 class Details extends StatefulWidget {
   Details({super.key, required this.skate});
@@ -18,9 +19,26 @@ class _DetailsState extends State<Details> {
         appBar:
             AppBar(title: Text('${widget.skate.brand} ${widget.skate.name}')),
         body: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             imagesCarousel(widget.skate.urls, 300),
+            Container(
+              margin: const EdgeInsets.only(left: 20, bottom: 10, right: 20),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  const Text(
+                    'Specs',
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+                  ),
+                  ElevatedButton(
+                      onPressed: () => {},
+                      style: ElevatedButton.styleFrom(
+                          backgroundColor: globals.globalColor),
+                      child: const Text('Check website')),
+                ],
+              ),
+            ),
             Row(mainAxisAlignment: MainAxisAlignment.spaceAround, children: [
               Row(children: [
                 const Icon(Icons.speed),
@@ -38,7 +56,13 @@ class _DetailsState extends State<Details> {
                     style: const TextStyle(fontWeight: FontWeight.bold))
               ])
             ]),
-            Divider(),
+            Container(
+              margin: const EdgeInsets.only(top: 20, left: 20),
+              child: const Text(
+                'Ressources',
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+              ),
+            ),
             Expanded(
               child: ListView.builder(
                   itemCount: VideoList_Mock.length,

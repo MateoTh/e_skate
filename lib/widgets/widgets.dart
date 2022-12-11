@@ -1,18 +1,19 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:e_skate/sharded/global.dart' as globals;
 
 Widget getNote(
-    double note, IconData iconFilled, IconData iconEmpty, double size) {
-  int intNote = note.round();
+    num? note, IconData iconFilled, IconData iconEmpty, double size) {
+  int intNote = note != null ? note.round() : 0;
   List<Icon> liste = [];
 
   for (var i = 0; i < intNote; i++) {
-    liste.add(Icon(iconFilled, size: size, color: const Color(0xffFF914D)));
+    liste.add(Icon(iconFilled, size: size, color: globals.globalColor));
   }
 
   for (var i = 0; i < 5 - intNote; i++) {
-    liste.add(Icon(iconEmpty, size: size, color: const Color(0xffFF914D)));
+    liste.add(Icon(iconEmpty, size: size, color: globals.globalColor));
   }
 
   return Row(
