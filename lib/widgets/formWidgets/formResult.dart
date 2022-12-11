@@ -20,15 +20,15 @@ class _FromResultState extends State<FromResult> {
         title: Text('${widget.formData.budjetLibelle!} budjet'),
       ),
       body: Container(
-          margin: const EdgeInsets.only(top: 10),
-          child: SkateList(
-              skates: repository.skates
-                  .where('type', isEqualTo: widget.formData.vehiculeValue)
-                  .where('price',
-                      isGreaterThanOrEqualTo: widget.formData.budjetMin)
-                  .where('price',
-                      isLessThanOrEqualTo: widget.formData.budjetMax)
-                  .snapshots())),
+        margin: const EdgeInsets.only(top: 10),
+        child: SkateList(
+          skates: repository.skates
+              .where('type', isEqualTo: widget.formData.vehiculeValue)
+              .where('price', isGreaterThanOrEqualTo: widget.formData.budjetMin)
+              .where('price', isLessThanOrEqualTo: widget.formData.budjetMax)
+              .snapshots(),
+        ),
+      ),
     );
   }
 }
