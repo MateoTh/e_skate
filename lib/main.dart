@@ -2,7 +2,6 @@ import 'package:e_skate/pages/home_page.dart';
 import 'package:e_skate/pages/map_page.dart';
 import 'package:e_skate/pages/search_page.dart';
 import 'package:e_skate/profile.dart';
-import 'package:e_skate/widgets/skatelist.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -12,7 +11,7 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp])
-      .then((value) => runApp(MyApp()));
+      .then((value) => runApp(const MyApp()));
 }
 
 class MyApp extends StatelessWidget {

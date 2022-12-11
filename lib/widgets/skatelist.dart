@@ -1,13 +1,13 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:e_skate/details.dart';
 import 'package:e_skate/objects/skate.dart';
-import 'package:e_skate/repository/data_repository.dart';
 import 'package:flutter/material.dart';
 
 import 'widgets.dart';
 
 class SkateList extends StatefulWidget {
-  const SkateList({super.key});
+  const SkateList({super.key, required this.skates});
+  final Stream<QuerySnapshot<Object?>> skates;
 
   @override
   State<SkateList> createState() => _SkateListState();
@@ -16,39 +16,26 @@ class SkateList extends StatefulWidget {
 class _SkateListState extends State<SkateList> {
   @override
   Widget build(BuildContext context) {
-    final DataRepository repository = DataRepository();
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Container(
-          margin: const EdgeInsets.only(top: 10, left: 20, bottom: 10),
-          child: const Text(
-            'Discover',
-            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
-          ),
-        ),
-        StreamBuilder<QuerySnapshot>(
-          stream: repository.skates.orderBy('name').snapshots(),
-          builder: (context, snapshot) {
-            if (!snapshot.hasData) {
-              return const LinearProgressIndicator(
-                color: Color(0xffFF914D),
-              );
-            }
-            return GridView.count(
-              shrinkWrap: true,
-              physics: const ClampingScrollPhysics(),
-              crossAxisCount: 2,
-              mainAxisSpacing: 20,
-              children: listCardSkate(
-                  context,
-                  snapshot.data!.docs
-                      .map((skate) => Skate.fromSnapshot(skate))
-                      .toList()),
-            );
-          },
-        ),
-      ],
+    return StreamBuilder<QuerySnapshot>(
+      stream: widget.skates,
+      builder: (context, snapshot) {
+        if (!snapshot.hasData) {
+          return const LinearProgressIndicator(
+            color: Color(0xffFF914D),
+          );
+        }
+        return GridView.count(
+          shrinkWrap: true,
+          physics: const ClampingScrollPhysics(),
+          crossAxisCount: 2,
+          mainAxisSpacing: 20,
+          children: listCardSkate(
+              context,
+              snapshot.data!.docs
+                  .map((skate) => Skate.fromSnapshot(skate))
+                  .toList()),
+        );
+      },
     );
   }
 }

@@ -5,8 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:e_skate/sharded/global.dart' as globals;
 
 class Details extends StatefulWidget {
-  Details({super.key, required this.skate});
-  Skate skate;
+  const Details({super.key, required this.skate});
+  final Skate skate;
 
   @override
   State<Details> createState() => _DetailsState();

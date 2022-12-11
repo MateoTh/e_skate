@@ -30,7 +30,7 @@ Widget listTileYoutube(String idVideo, String name, String author) {
     trailing: const Icon(Icons.play_arrow),
     onTap: () async {
       if (!await launchUrl(
-        Uri.http('www.youtube.com', 'watch', {'v': '$idVideo'}),
+        Uri.http('www.youtube.com', 'watch', {'v': idVideo}),
         mode: LaunchMode.externalApplication,
       )) {
         throw 'Could not launch www.youtube.com/watch?v=$idVideo';
@@ -48,16 +48,14 @@ Widget imagesCarousel(List<String> images, double height) {
     ),
     items: images
         .map((item) => Container(
-              child: Container(
-                margin: const EdgeInsets.all(5.0),
-                child: ClipRRect(
-                    borderRadius: const BorderRadius.all(Radius.circular(5.0)),
-                    child: Stack(
-                      children: <Widget>[
-                        Image.network(item, fit: BoxFit.cover, width: 1000.0),
-                      ],
-                    )),
-              ),
+              margin: const EdgeInsets.all(5.0),
+              child: ClipRRect(
+                  borderRadius: const BorderRadius.all(Radius.circular(5.0)),
+                  child: Stack(
+                    children: <Widget>[
+                      Image.network(item, fit: BoxFit.cover, width: 1000.0),
+                    ],
+                  )),
             ))
         .toList(),
   );

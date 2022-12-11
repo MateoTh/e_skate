@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 
 class SearchPage extends StatefulWidget {
   const SearchPage({super.key});
@@ -33,11 +31,11 @@ class _SearchPageState extends State<SearchPage> {
   Widget vehiculeForm() {
     return ListView(
       children: [
-        FilterListTile('Skateboards', const Icon(Icons.skateboarding)),
-        FilterListTile('OneWeels', const Icon(Icons.circle)),
-        FilterListTile('Unicyles', const Icon(Icons.circle)),
-        FilterListTile('Scooters', const Icon(Icons.electric_scooter)),
-        FilterListTile('Bikes', const Icon(Icons.electric_bike)),
+        filterListTile('Skateboards', const Icon(Icons.skateboarding)),
+        filterListTile('OneWeels', const Icon(Icons.circle)),
+        filterListTile('Unicyles', const Icon(Icons.circle)),
+        filterListTile('Scooters', const Icon(Icons.electric_scooter)),
+        filterListTile('Bikes', const Icon(Icons.electric_bike)),
       ],
     );
   }
@@ -45,15 +43,15 @@ class _SearchPageState extends State<SearchPage> {
   Widget budjetForm() {
     return ListView(
       children: [
-        FilterListTile('000 / 300 €', const Icon(Icons.star_border)),
-        FilterListTile('300 / 600 €', const Icon(Icons.star)),
-        FilterListTile('600 / 900 €', const Icon(Icons.sunny_snowing)),
-        FilterListTile('900 / +++ €', const Icon(Icons.sunny)),
+        filterListTile('000 / 300 €', const Icon(Icons.star_border)),
+        filterListTile('300 / 600 €', const Icon(Icons.star)),
+        filterListTile('600 / 900 €', const Icon(Icons.sunny_snowing)),
+        filterListTile('900 / +++ €', const Icon(Icons.sunny)),
       ],
     );
   }
 
-  Widget FilterListTile(String text, Icon icon) {
+  Widget filterListTile(String text, Icon icon) {
     return ListTile(
       title: Text(text),
       leading: icon,

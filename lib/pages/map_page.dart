@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_polyline_points/flutter_polyline_points.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -14,8 +12,8 @@ class MapPage extends StatefulWidget {
 
 class _MapPageState extends State<MapPage> {
   late GoogleMapController mapController;
-  Map<String, Marker> _markers = {};
-  Map<String, Polyline> _polylines = {};
+  final Map<String, Marker> _markers = {};
+  final Map<String, Polyline> _polylines = {};
 
   @override
   Widget build(BuildContext context) {
@@ -67,9 +65,9 @@ class _MapPageState extends State<MapPage> {
     );
 
     if (result.points.isNotEmpty) {
-      result.points.forEach((PointLatLng point) {
+      for (var point in result.points) {
         polylineCoordinates.add(LatLng(point.latitude, point.longitude));
-      });
+      }
     }
 
     Polyline polyline = Polyline(

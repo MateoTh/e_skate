@@ -1,8 +1,7 @@
 import 'package:e_skate/objects/skate.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:e_skate/repository/data_repository.dart';
+import 'package:e_skate/widgets/skatelist.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:e_skate/sharded/global.dart' as globals;
 
 class BrandHorizontalList extends StatelessWidget {
@@ -10,7 +9,7 @@ class BrandHorizontalList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    List brand = listBrandIcon();
+    List brand = listBrandIcon(context);
     return Container(
         margin: const EdgeInsets.only(top: 15, left: 20),
         child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
@@ -29,7 +28,7 @@ class BrandHorizontalList extends StatelessWidget {
         ]));
   }
 
-  Widget brandIcon(String brand) {
+  Widget brandIcon(BuildContext context, String brand) {
     return GestureDetector(
         child: Container(
           margin: const EdgeInsets.only(top: 10, bottom: 10, right: 10),
@@ -45,13 +44,27 @@ class BrandHorizontalList extends StatelessWidget {
             ),
           ),
         ),
-        onTap: () {});
+        onTap: () {
+          DataRepository repository = DataRepository();
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: ((context) => Scaffold(
+                      appBar: AppBar(title: Text(brand)),
+                      body: Container(
+                        margin: const EdgeInsets.only(top: 10),
+                        child: SkateList(
+                            skates: repository.skates
+                                .where('brand', isEqualTo: brand)
+                                .snapshots()),
+                      )))));
+        });
   }
 
-  List<Widget> listBrandIcon() {
+  List<Widget> listBrandIcon(BuildContext context) {
     List<Widget> list = [];
     for (var brand in BrandList_Mock) {
-      list.add(brandIcon(brand));
+      list.add(brandIcon(context, brand));
     }
     return list;
   }
