@@ -1,3 +1,4 @@
+import 'package:e_skate/widgets/formWidgets/vehiculeForm.dart';
 import 'package:flutter/material.dart';
 
 class SearchPage extends StatefulWidget {
@@ -13,13 +14,13 @@ class _SearchPageState extends State<SearchPage> {
   @override
   Widget build(BuildContext context) {
     List<Widget> forms = getForms();
-    return forms.elementAt(currentForm);
+    return const VehiculeForm();
   }
 
   List<Widget> getForms() {
     return [
-      vehiculeForm(),
-      budjetForm(),
+      // vehiculeForm(),
+      // budjetForm(),
     ];
   }
 
@@ -28,28 +29,28 @@ class _SearchPageState extends State<SearchPage> {
     setState(() {});
   }
 
-  Widget vehiculeForm() {
-    return ListView(
-      children: [
-        filterListTile('Skateboards', const Icon(Icons.skateboarding)),
-        filterListTile('OneWeels', const Icon(Icons.circle)),
-        filterListTile('Unicyles', const Icon(Icons.circle)),
-        filterListTile('Scooters', const Icon(Icons.electric_scooter)),
-        filterListTile('Bikes', const Icon(Icons.electric_bike)),
-      ],
-    );
-  }
+  // Widget vehiculeForm() {
+  //   return ListView(
+  //     children: [
+  //       filterListTile('Skateboards', const Icon(Icons.skateboarding)),
+  //       filterListTile('OneWeels', const Icon(Icons.circle)),
+  //       filterListTile('Unicyles', const Icon(Icons.circle)),
+  //       filterListTile('Scooters', const Icon(Icons.electric_scooter)),
+  //       filterListTile('Bikes', const Icon(Icons.electric_bike)),
+  //     ],
+  //   );
+  // }
 
-  Widget budjetForm() {
-    return ListView(
-      children: [
-        filterListTile('000 / 300 €', const Icon(Icons.star_border)),
-        filterListTile('300 / 600 €', const Icon(Icons.star)),
-        filterListTile('600 / 900 €', const Icon(Icons.sunny_snowing)),
-        filterListTile('900 / +++ €', const Icon(Icons.sunny)),
-      ],
-    );
-  }
+  // Widget budjetForm() {
+  //   return ListView(
+  //     children: [
+  //       filterListTile('000 / 300 €', const Icon(Icons.star_border)),
+  //       filterListTile('300 / 600 €', const Icon(Icons.star)),
+  //       filterListTile('600 / 900 €', const Icon(Icons.sunny_snowing)),
+  //       filterListTile('900 / +++ €', const Icon(Icons.sunny)),
+  //     ],
+  //   );
+  // }
 
   Widget filterListTile(String text, Icon icon) {
     return ListTile(

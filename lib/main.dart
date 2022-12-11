@@ -2,6 +2,7 @@ import 'package:e_skate/pages/home_page.dart';
 import 'package:e_skate/pages/map_page.dart';
 import 'package:e_skate/pages/search_page.dart';
 import 'package:e_skate/profile.dart';
+import 'package:e_skate/widgets/formWidgets/budjetForm.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
