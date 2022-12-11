@@ -75,7 +75,7 @@ Widget cardSkate(Skate skate, BuildContext context) {
     onTap: () {
       Navigator.of(context).push(MaterialPageRoute(
           builder: (BuildContext context) {
-            return Details(skate: skate);
+            return DetailsPage(skate: skate);
           },
           fullscreenDialog: true));
     },

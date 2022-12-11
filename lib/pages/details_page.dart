@@ -25,26 +25,9 @@ class _DetailsPageState extends State<DetailsPage> {
             imagesCarousel(widget.skate.urls, 300),
             Container(
               margin: const EdgeInsets.only(left: 20, bottom: 10, right: 20),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  const Text(
-                    'Specs',
-                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
-                  ),
-                  ElevatedButton(
-                      onPressed: () async {
-                        if (!await launchUrl(
-                          Uri.parse(widget.skate.webSite),
-                          mode: LaunchMode.externalApplication,
-                        )) {
-                          throw 'Could not launch ${widget.skate.webSite}';
-                        }
-                      },
-                      style: ElevatedButton.styleFrom(
-                          backgroundColor: globals.globalColor),
-                      child: const Text('Check website')),
-                ],
+              child: const Text(
+                'Specifications',
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
               ),
             ),
             Row(mainAxisAlignment: MainAxisAlignment.spaceAround, children: [
@@ -70,6 +53,37 @@ class _DetailsPageState extends State<DetailsPage> {
                 'Ressources',
                 style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
               ),
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                ElevatedButton(
+                  onPressed: () async {
+                    if (!await launchUrl(
+                      Uri.parse(widget.skate.webSite),
+                      mode: LaunchMode.externalApplication,
+                    )) {
+                      throw 'Could not launch ${widget.skate.webSite}';
+                    }
+                  },
+                  style: ElevatedButton.styleFrom(
+                      backgroundColor: globals.globalColor),
+                  child: const Text('Check website'),
+                ),
+                ElevatedButton(
+                  onPressed: () async {
+                    if (!await launchUrl(
+                      Uri.parse(widget.skate.webSite),
+                      mode: LaunchMode.externalApplication,
+                    )) {
+                      throw 'Could not launch ${widget.skate.webSite}';
+                    }
+                  },
+                  style: ElevatedButton.styleFrom(
+                      backgroundColor: globals.globalColor),
+                  child: const Text('Check website'),
+                )
+              ],
             ),
             Expanded(
               child: ListView.builder(
