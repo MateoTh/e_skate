@@ -3,6 +3,7 @@ import 'package:e_skate/objects/video.dart';
 import 'package:e_skate/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:e_skate/sharded/global.dart' as globals;
+import 'package:url_launcher/url_launcher.dart';
 
 class Details extends StatefulWidget {
   const Details({super.key, required this.skate});
@@ -32,7 +33,14 @@ class _DetailsState extends State<Details> {
                     style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
                   ),
                   ElevatedButton(
-                      onPressed: () => {},
+                      onPressed: () async {
+                        if (!await launchUrl(
+                          Uri.parse(widget.skate.webSite),
+                          mode: LaunchMode.externalApplication,
+                        )) {
+                          throw 'Could not launch ${widget.skate.webSite}';
+                        }
+                      },
                       style: ElevatedButton.styleFrom(
                           backgroundColor: globals.globalColor),
                       child: const Text('Check website')),
