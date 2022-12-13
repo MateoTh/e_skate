@@ -1,7 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:e_skate/details.dart';
 import 'package:e_skate/objects/skate.dart';
-import 'package:e_skate/sharded/global.dart';
 import 'package:flutter/material.dart';
 
 import 'widgets.dart';

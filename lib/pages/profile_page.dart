@@ -1,5 +1,6 @@
 import 'package:e_skate/authentication/login.dart';
 import 'package:e_skate/authentication/profile.dart';
+import 'package:e_skate/authentication/register.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 

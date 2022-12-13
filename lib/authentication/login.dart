@@ -53,45 +53,54 @@ class LoginState extends State<Login> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: const EdgeInsets.all(20),
-      child: Column(
-        children: [
-          Container(
-            margin: const EdgeInsets.only(top: 100),
-            width: 150,
-            height: 150,
-            decoration: BoxDecoration(
-              image:
-                  const DecorationImage(image: AssetImage('assets/logo.png')),
-              border: Border.all(color: Colors.white, width: 5),
-              borderRadius: BorderRadius.circular(100),
-            ),
-          ),
-          TextField(
-            controller: loginController,
-            decoration: const InputDecoration(labelText: 'Username'),
-          ),
-          TextField(
-            controller: passwordController,
-            obscureText: true,
-            decoration: const InputDecoration(labelText: 'Password'),
-          ),
-          TextButton(
-              child: const Text(
-                'Forgot password ?',
-                style: TextStyle(color: Colors.grey),
+    return SingleChildScrollView(
+      physics: const BouncingScrollPhysics(),
+      child: Container(
+        margin: const EdgeInsets.all(20),
+        child: Column(
+          children: [
+            Container(
+              margin: const EdgeInsets.only(top: 100),
+              width: 150,
+              height: 150,
+              decoration: BoxDecoration(
+                image:
+                    const DecorationImage(image: AssetImage('assets/logo.png')),
+                border: Border.all(color: Colors.white, width: 5),
+                borderRadius: BorderRadius.circular(100),
               ),
-              onPressed: () {}),
-          const SizedBox(height: 50),
-          ElevatedButton(
-            onPressed: logIn,
-            style: ElevatedButton.styleFrom(
-                backgroundColor: globalColor,
-                minimumSize: const Size.fromHeight(50)),
-            child: const Text('Submit'),
-          ),
-        ],
+            ),
+            TextField(
+              controller: loginController,
+              decoration: const InputDecoration(labelText: 'Username'),
+            ),
+            TextField(
+              controller: passwordController,
+              obscureText: true,
+              decoration: const InputDecoration(labelText: 'Password'),
+            ),
+            TextButton(
+                child: const Text(
+                  'Forgot password ?',
+                  style: TextStyle(color: Colors.grey),
+                ),
+                onPressed: () {}),
+            const SizedBox(height: 50),
+            ElevatedButton(
+              onPressed: logIn,
+              style: ElevatedButton.styleFrom(
+                  backgroundColor: globalColor,
+                  minimumSize: const Size.fromHeight(50)),
+              child: const Text('Submit'),
+            ),
+            TextButton(
+                child: const Text(
+                  'Sign Up',
+                  style: TextStyle(color: Colors.grey),
+                ),
+                onPressed: () {}),
+          ],
+        ),
       ),
     );
   }
