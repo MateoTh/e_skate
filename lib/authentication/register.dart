@@ -39,8 +39,9 @@ class _RegisterState extends State<Register> {
                 ),
               ),
               TextFormField(
+                keyboardType: TextInputType.visiblePassword,
                 controller: loginController,
-                decoration: const InputDecoration(labelText: 'Username'),
+                decoration: const InputDecoration(labelText: 'Email'),
                 autovalidateMode: AutovalidateMode.onUserInteraction,
                 validator: (login) =>
                     login != null && !EmailValidator.validate(login)
@@ -48,6 +49,7 @@ class _RegisterState extends State<Register> {
                         : null,
               ),
               TextFormField(
+                  keyboardType: TextInputType.visiblePassword,
                   controller: passwordController,
                   obscureText: true,
                   decoration: const InputDecoration(labelText: 'Password'),
@@ -100,10 +102,12 @@ class _RegisterState extends State<Register> {
 
     try {
       await FirebaseAuth.instance.createUserWithEmailAndPassword(
-          email: loginController.text, password: passwordController.text);
+          email: loginController.text,
+          password: passwordController.text.trim());
     } on FirebaseAuthException catch (e) {
       print(e);
-      final snackbar = SnackBar(content: Text(e.message!), backgroundColor: globalColor);
+      final snackbar =
+          SnackBar(content: Text(e.message!), backgroundColor: globalColor);
       ScaffoldMessenger.of(context).showSnackBar(snackbar);
     }
   }

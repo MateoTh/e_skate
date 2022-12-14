@@ -1,3 +1,4 @@
+import 'package:e_skate/authentication/forgot_password_page.dart';
 import 'package:e_skate/sharded/global.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/gestures.dart';
@@ -37,20 +38,27 @@ class LoginState extends State<Login> {
               ),
             ),
             TextField(
+              keyboardType: TextInputType.visiblePassword,
               controller: loginController,
-              decoration: const InputDecoration(labelText: 'Username'),
+              decoration: const InputDecoration(labelText: 'Email'),
             ),
             TextField(
               controller: passwordController,
               obscureText: true,
               decoration: const InputDecoration(labelText: 'Password'),
             ),
-            TextButton(
+            Container(
+              margin: const EdgeInsets.only(top: 15),
+              child: GestureDetector(
                 child: const Text(
                   'Forgot password ?',
-                  style: TextStyle(color: Colors.grey),
+                  style: TextStyle(
+                      color: Colors.grey, fontWeight: FontWeight.bold),
                 ),
-                onPressed: () {}),
+                onTap: () => Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context) => const ForgotPasswordPage())),
+              ),
+            ),
             const SizedBox(height: 50),
             ElevatedButton(
               onPressed: logIn,
@@ -62,11 +70,12 @@ class LoginState extends State<Login> {
             Container(
               margin: const EdgeInsets.only(top: 15),
               child: RichText(
-                  text: TextSpan(text: '', children: [
+                  text: TextSpan(children: [
                 TextSpan(
                     recognizer: TapGestureRecognizer()
                       ..onTap = widget.onclickedRegister,
-                      style: (const TextStyle(color: Colors.grey, fontWeight: FontWeight.bold)),
+                    style: (const TextStyle(
+                        color: Colors.grey, fontWeight: FontWeight.bold)),
                     text: 'Sign Up')
               ])),
             ),
@@ -82,6 +91,9 @@ class LoginState extends State<Login> {
           email: loginController.text, password: passwordController.text);
     } on FirebaseAuthException catch (e) {
       print(e);
+      final snackbar =
+          SnackBar(content: Text(e.message!), backgroundColor: globalColor);
+      ScaffoldMessenger.of(context).showSnackBar(snackbar);
     }
   }
 }

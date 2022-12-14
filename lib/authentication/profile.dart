@@ -18,8 +18,7 @@ class _ProfileState extends State<Profile> {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(32),
+    return Center(
       child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
         const Text(
           'Signed in as',
