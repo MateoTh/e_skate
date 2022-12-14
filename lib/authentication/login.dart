@@ -1,45 +1,11 @@
 import 'package:e_skate/sharded/global.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
-// class Login extends StatefulWidget {
-//   const Login({super.key});
-
-//   @override
-//   State<Login> createState() => _LoginState();
-// }
-
-// class _LoginState extends State<Login> {
-//   @override
-//   Widget build(BuildContext context) {
-//     return SignInScreen(
-//       headerBuilder: (context, constraints, _) {
-//         return Center(
-//           child: Container(
-//             margin: const EdgeInsets.only(top: 20),
-//             width: 100,
-//             height: 100,
-//             decoration: BoxDecoration(
-//                 image:
-//                     const DecorationImage(image: AssetImage('assets/logo.png')),
-//                 border: Border.all(color: Colors.white, width: 5),
-//                 borderRadius: BorderRadius.circular(100),),
-//           ),
-//         );
-//       },
-//       providerConfigs: const [
-//         EmailProviderConfiguration(),
-//         // GoogleProviderConfiguration(
-//         //   clientId:
-//         //       '64029444217-si6c4dm423ievj3g15f22o5f1h2vf7v4.apps.googleusercontent.com',
-//         // ),
-//       ],
-//     );
-//   }
-// }
-
 class Login extends StatefulWidget {
-  const Login({super.key});
+  final VoidCallback onclickedRegister;
+  const Login({super.key, required this.onclickedRegister});
 
   @override
   LoginState createState() {
@@ -91,14 +57,19 @@ class LoginState extends State<Login> {
               style: ElevatedButton.styleFrom(
                   backgroundColor: globalColor,
                   minimumSize: const Size.fromHeight(50)),
-              child: const Text('Submit'),
+              child: const Text('Sign In'),
             ),
-            TextButton(
-                child: const Text(
-                  'Sign Up',
-                  style: TextStyle(color: Colors.grey),
-                ),
-                onPressed: () {}),
+            Container(
+              margin: const EdgeInsets.only(top: 15),
+              child: RichText(
+                  text: TextSpan(text: '', children: [
+                TextSpan(
+                    recognizer: TapGestureRecognizer()
+                      ..onTap = widget.onclickedRegister,
+                      style: (const TextStyle(color: Colors.grey, fontWeight: FontWeight.bold)),
+                    text: 'Sign Up')
+              ])),
+            ),
           ],
         ),
       ),

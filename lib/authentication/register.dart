@@ -1,34 +1,11 @@
 import 'package:e_skate/sharded/global.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutterfire_ui/auth.dart';
-
-// class Register extends StatefulWidget {
-//   const Register({super.key});
-
-//   @override
-//   State<Register> createState() => _RegisterState();
-// }
-
-// class _RegisterState extends State<Register> {
-//   @override
-//   Widget build(BuildContext context) {
-//     return const RegisterScreen(
-//       providerConfigs: [
-//         EmailProviderConfiguration(),
-//         GoogleProviderConfiguration(
-//           clientId: '...',
-//         ),
-//       ],
-//     );
-//   }
-// }
 
 class Register extends StatefulWidget {
-  const Register({super.key});
+  final VoidCallback onclickedLogin;
+  const Register({super.key, required this.onclickedLogin});
 
   @override
   State<Register> createState() => _RegisterState();
@@ -77,7 +54,18 @@ class _RegisterState extends State<Register> {
               style: ElevatedButton.styleFrom(
                   backgroundColor: globalColor,
                   minimumSize: const Size.fromHeight(50)),
-              child: const Text('Submit'),
+              child: const Text('Sign Up'),
+            ),
+            Container(
+              margin: const EdgeInsets.only(top: 15),
+              child: RichText(
+                  text: TextSpan(text: '', children: [
+                TextSpan(
+                    recognizer: TapGestureRecognizer()
+                      ..onTap = widget.onclickedLogin,
+                      style: (const TextStyle(color: Colors.grey, fontWeight: FontWeight.bold)),
+                    text: 'Sign In')
+              ])),
             ),
           ],
         ),

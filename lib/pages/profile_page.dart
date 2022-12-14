@@ -1,6 +1,6 @@
-import 'package:e_skate/authentication/login.dart';
 import 'package:e_skate/authentication/profile.dart';
-import 'package:e_skate/authentication/register.dart';
+import 'package:e_skate/pages/auth_page.dart';
+import 'package:e_skate/sharded/global.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
@@ -19,11 +19,15 @@ class _ProfilePageState extends State<ProfilePage> {
       body: StreamBuilder<User?>(
         stream: FirebaseAuth.instance.authStateChanges(),
         builder: (context, snapshot) {
-          if (!snapshot.hasData) {
-            return const Login();
-          }
-
-          return const Profile();
+          if(snapshot.connectionState == ConnectionState.waiting){
+            return Center(child: CircularProgressIndicator(color: globalColor));
+          } else if (snapshot.hasError) {
+            return const Center(child: Text('Something went wrong'));
+          } else if (!snapshot.hasData) {
+            return const AuthPage();
+          } else {
+            return const Profile();
+          }          
         },
       ),
     );
