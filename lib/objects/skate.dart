@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class Skate {
+  String uid;
   List<String> urls;
   String name = 'Name';
   String brand = 'Brand';
@@ -10,10 +11,10 @@ class Skate {
   num price = 600;
   num? rate = 3.5;
   String? referenceId;
+  List<String> likes;
 
-  Skate(this.urls, this.name, this.brand, this.webSite, this.topSpeed,
-      this.range, this.price, this.rate);
-  Skate.url(this.urls);
+  Skate(this.uid, this.urls, this.name, this.brand, this.webSite, this.topSpeed,
+      this.range, this.price, this.rate, this.likes);
 
   factory Skate.fromJson(Map<String, dynamic> json) => skateFromJson(json);
   factory Skate.fromSnapshot(DocumentSnapshot snapshot) {
@@ -23,6 +24,7 @@ class Skate {
 
 Skate skateFromJson(Map<String, dynamic> json) {
   return Skate(
+      json['id'] as String,
       List<String>.from(json["images"].map((x) => x)),
       json['name'] as String,
       json['brand'] as String,
@@ -30,11 +32,13 @@ Skate skateFromJson(Map<String, dynamic> json) {
       json['topSpeed'] as num,
       json['range'] as num,
       json['price'] as num,
-      json['rate'] as num);
+      json['rate'] as num,
+      json['likes'].map<String>((i) => i as String).toList());
 }
 
 // 2
 Map<String, dynamic> skateToJson(Skate instance) => <String, dynamic>{
+      'id': instance.uid,
       'name': instance.name,
       'brand': instance.brand,
       'webSite': instance.webSite,
@@ -43,6 +47,7 @@ Map<String, dynamic> skateToJson(Skate instance) => <String, dynamic>{
       'range': instance.range,
       'price': instance.price,
       'rate': instance.rate,
+      'likes': instance.likes,
     };
 
 List<String> BrandList_Mock = [

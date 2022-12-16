@@ -86,26 +86,35 @@ Widget cardSkate(Skate skate, BuildContext context) {
                 borderRadius: BorderRadius.circular(8.0),
                 child: Image.network(skate.urls[0]))),
         Container(
-            margin: const EdgeInsets.only(left: 20, right: 20),
-            child:
-                Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+          margin: const EdgeInsets.only(left: 20, right: 20),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
               const SizedBox(height: 3),
               Text(
                 '${skate.brand} ${skate.name}',
                 overflow: TextOverflow.ellipsis,
               ),
               const SizedBox(height: 3),
-              Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-                getNote(skate.rate, Icons.star_rounded,
-                    Icons.star_outline_rounded, 15),
-                Row(children: [
-                  Text(skate.price.toString(),
-                      style: const TextStyle(fontWeight: FontWeight.bold)),
-                  const Icon(Icons.attach_money, size: 15)
-                ])
-              ])
-            ]))
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  getNote(skate.rate, Icons.star_rounded,
+                      Icons.star_outline_rounded, 15),
+                  Row(
+                    children: [
+                      Text(skate.price.toString(),
+                          style: const TextStyle(fontWeight: FontWeight.bold)),
+                      const Icon(Icons.attach_money, size: 15)
+                    ],
+                  )
+                ],
+              ),
+            ],
+          ),
+        )
       ],
     ),
   );
 }
+
