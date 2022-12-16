@@ -1,3 +1,4 @@
+import 'package:e_skate/authentication/auth_service.dart';
 import 'package:e_skate/sharded/global.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
@@ -41,6 +42,7 @@ class _ProfileState extends State<Profile> {
   }
 
   void signOut() {
-    FirebaseAuth.instance.signOut();
+    AuthService auth = AuthService();
+    auth.logOut();
   }
 }

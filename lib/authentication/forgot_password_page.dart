@@ -1,3 +1,4 @@
+import 'package:e_skate/authentication/auth_service.dart';
 import 'package:e_skate/sharded/global.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -71,18 +72,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
   }
 
   Future resetPassword() async {
-    try {
-      await FirebaseAuth.instance
-          .sendPasswordResetEmail(email: emailController.text);
-      final snackbar = SnackBar(
-          content: const Text('Password reset Email sent'),
-          backgroundColor: globalColor);
-      ScaffoldMessenger.of(context).showSnackBar(snackbar);
-    } on FirebaseAuthException catch (e) {
-      print(e);
-      final snackbar =
-          SnackBar(content: Text(e.message!), backgroundColor: globalColor);
-      ScaffoldMessenger.of(context).showSnackBar(snackbar);
-    }
+    AuthService auth = AuthService();
+    auth.resetPassword(context, emailController.text);
   }
 }

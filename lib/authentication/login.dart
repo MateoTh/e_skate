@@ -1,3 +1,4 @@
+import 'package:e_skate/authentication/auth_service.dart';
 import 'package:e_skate/authentication/forgot_password_page.dart';
 import 'package:e_skate/sharded/global.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -86,14 +87,7 @@ class LoginState extends State<Login> {
   }
 
   Future logIn() async {
-    try {
-      await FirebaseAuth.instance.signInWithEmailAndPassword(
-          email: loginController.text, password: passwordController.text);
-    } on FirebaseAuthException catch (e) {
-      print(e);
-      final snackbar =
-          SnackBar(content: Text(e.message!), backgroundColor: globalColor);
-      ScaffoldMessenger.of(context).showSnackBar(snackbar);
-    }
+    AuthService auth = AuthService();
+    auth.logIn(context, loginController.text, passwordController.text);
   }
 }
