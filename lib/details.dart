@@ -32,7 +32,7 @@ class _DetailsPageState extends State<DetailsPage> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 getNote(widget.skate.rate, Icons.star, Icons.star_border, 30),
-                likeButton(widget.skate)
+                LikeButton(skate: widget.skate)
               ],
             ),
           ),
@@ -99,38 +99,51 @@ class _DetailsPageState extends State<DetailsPage> {
   }
 }
 
-Widget likeButton(Skate skate) {
-  DataRepository repository = DataRepository();
-  return StreamBuilder<User?>(
-    stream: FirebaseAuth.instance.authStateChanges(),
-    builder: (context, snapshot) {
-      if (!snapshot.hasData) {
-        return Container();
-      }
-      return IconButton(
-        onPressed: (() => {
-              if (skate.likes.contains(snapshot.data!.uid))
-                {
-                  skate.likes.remove(snapshot.data!.uid),
-                  repository.skates.doc(skate.referenceId).update({
-                    'likes': FieldValue.arrayRemove([snapshot.data!.uid])
-                  })
-                }
-              else
-                {
-                  skate.likes.add(snapshot.data!.uid),
-                  repository.skates.doc(skate.referenceId).update({
-                    'likes': FieldValue.arrayUnion([snapshot.data!.uid])
-                  })
-                }
-            }),
-        icon: Icon(
-            skate.likes.contains(snapshot.data!.uid)
-                ? Icons.favorite
-                : Icons.favorite_border,
-            color: globalColor,
-            size: 30),
-      );
-    },
-  );
+class LikeButton extends StatefulWidget {
+  final Skate skate;
+  const LikeButton({super.key, required this.skate});
+
+  @override
+  State<LikeButton> createState() => _LikeButtonState();
+}
+
+class _LikeButtonState extends State<LikeButton> {
+  @override
+  Widget build(BuildContext context) {
+    DataRepository repository = DataRepository();
+    return StreamBuilder<User?>(
+      stream: FirebaseAuth.instance.authStateChanges(),
+      builder: (context, snapshot) {
+        if (!snapshot.hasData) {
+          return Container();
+        }
+        return IconButton(
+          onPressed: (() => {
+                if (widget.skate.likes.contains(snapshot.data!.uid))
+                  {
+                    widget.skate.likes.remove(snapshot.data!.uid),
+                    repository.skates.doc(widget.skate.uid).update({
+                      'likes': FieldValue.arrayRemove([snapshot.data!.uid])
+                    }),
+                    setState(() => {})
+                  }
+                else
+                  {
+                    widget.skate.likes.add(snapshot.data!.uid),
+                    repository.skates.doc(widget.skate.uid).update({
+                      'likes': FieldValue.arrayUnion([snapshot.data!.uid])
+                    }),
+                    setState(() => {})
+                  }
+              }),
+          icon: Icon(
+              widget.skate.likes.contains(snapshot.data!.uid)
+                  ? Icons.favorite
+                  : Icons.favorite_border,
+              color: globalColor,
+              size: 30),
+        );
+      },
+    );
+  }
 }

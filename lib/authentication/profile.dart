@@ -1,12 +1,11 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:e_skate/authentication/auth_service.dart';
 import 'package:e_skate/authentication/widgets/profile_image_widget.dart';
+import 'package:e_skate/repository/data_repository.dart';
 import 'package:e_skate/sharded/global.dart';
+import 'package:e_skate/widgets/skate_horizontal_list.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutterfire_ui/auth.dart';
 
 class Profile extends StatefulWidget {
   const Profile({super.key});
@@ -50,8 +49,11 @@ class _ProfileState extends State<Profile> {
           ],
         ),
         const SizedBox(height: 20),
-        const Text('My Skates',
-            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20)),
+        Container(
+          margin: const EdgeInsets.only(left: 20),
+          child: const Text('My Skates',
+              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20)),
+        ),
         const SizedBox(
           height: 100,
           child: Center(
@@ -62,40 +64,43 @@ class _ProfileState extends State<Profile> {
           ),
         ),
         const SizedBox(height: 20),
-        const Text('Loved ones',
-            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20)),
-        const SizedBox(
-          height: 100,
-          child: Center(
-            child: Text(
-              'The skates you like will appear here.',
-              style: TextStyle(color: Colors.grey),
-            ),
-          ),
-        ),
+        LikedSkateList_GetUser(),
+        // const SizedBox(
+        //   height: 100,
+        //   child: Center(
+        //     child: Text(
+        //       'The skates you like will appear here.',
+        //       style: TextStyle(color: Colors.grey),
+        //     ),
+        //   ),
+        // ),
       ],
     );
-
-    //   return Center(
-    //     child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-    //       const Text(
-    //         'Signed in as',
-    //         style: TextStyle(fontSize: 16),
-    //       ),
-    //       Text(
-    //         user!.email!,
-    //         style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-    //       ),
-    //       const SizedBox(
-    //         height: 15,
-    //       ),
-    //
-    //     ]),
-    //   );
   }
 
   void signOut() {
     AuthService auth = AuthService();
     auth.logOut();
+  }
+
+  Widget LikedSkateList_GetUser() {
+    return StreamBuilder<User?>(
+        stream: FirebaseAuth.instance.authStateChanges(),
+        builder: (context, snapshot) {
+          if (!snapshot.hasData) {
+            return const LinearProgressIndicator(
+              color: Color(0xffFF914D),
+            );
+          }
+          return LikedSkateList(snapshot.data);
+        });
+  }
+
+  Widget LikedSkateList(User? currentUser) {
+    DataRepository repository = DataRepository();
+    return SkateHorizontalList(
+        skates: repository.skates
+            .where('likes', arrayContains: currentUser!.uid)
+            .snapshots());
   }
 }

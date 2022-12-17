@@ -16,15 +16,15 @@ class Skate {
   Skate(this.uid, this.urls, this.name, this.brand, this.webSite, this.topSpeed,
       this.range, this.price, this.rate, this.likes);
 
-  factory Skate.fromJson(Map<String, dynamic> json) => skateFromJson(json);
+  factory Skate.fromJson(Map<String, dynamic> json, String id) => skateFromJson(json, id);
   factory Skate.fromSnapshot(DocumentSnapshot snapshot) {
-    return Skate.fromJson(snapshot.data() as Map<String, dynamic>);
+    return Skate.fromJson(snapshot.data() as Map<String, dynamic>, snapshot.id);
   }
 }
 
-Skate skateFromJson(Map<String, dynamic> json) {
+Skate skateFromJson(Map<String, dynamic> json, String id) {
   return Skate(
-      json['id'] as String,
+      id,
       List<String>.from(json["images"].map((x) => x)),
       json['name'] as String,
       json['brand'] as String,
@@ -38,7 +38,6 @@ Skate skateFromJson(Map<String, dynamic> json) {
 
 // 2
 Map<String, dynamic> skateToJson(Skate instance) => <String, dynamic>{
-      'id': instance.uid,
       'name': instance.name,
       'brand': instance.brand,
       'webSite': instance.webSite,
