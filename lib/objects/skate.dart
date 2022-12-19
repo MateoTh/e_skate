@@ -12,11 +12,13 @@ class Skate {
   num? rate = 3.5;
   String? referenceId;
   List<String> likes;
+  List<String> owners;
 
   Skate(this.uid, this.urls, this.name, this.brand, this.webSite, this.topSpeed,
-      this.range, this.price, this.rate, this.likes);
+      this.range, this.price, this.rate, this.likes, this.owners);
 
-  factory Skate.fromJson(Map<String, dynamic> json, String id) => skateFromJson(json, id);
+  factory Skate.fromJson(Map<String, dynamic> json, String id) =>
+      skateFromJson(json, id);
   factory Skate.fromSnapshot(DocumentSnapshot snapshot) {
     return Skate.fromJson(snapshot.data() as Map<String, dynamic>, snapshot.id);
   }
@@ -33,7 +35,8 @@ Skate skateFromJson(Map<String, dynamic> json, String id) {
       json['range'] as num,
       json['price'] as num,
       json['rate'] as num,
-      json['likes'].map<String>((i) => i as String).toList());
+      json['likes'].map<String>((i) => i as String).toList(),
+      json['owners'].map<String>((i) => i as String).toList());
 }
 
 // 2

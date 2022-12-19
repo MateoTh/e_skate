@@ -1,5 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:e_skate/details.dart';
+import 'package:e_skate/pages/details_page.dart';
 import 'package:e_skate/objects/skate.dart';
 import 'package:flutter/material.dart';
 
@@ -117,4 +117,3 @@ Widget cardSkate(Skate skate, BuildContext context) {
     ),
   );
 }
-

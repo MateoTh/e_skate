@@ -1,50 +1,56 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:e_skate/details.dart';
+import 'package:e_skate/pages/details_page.dart';
 import 'package:e_skate/objects/skate.dart';
 import 'package:e_skate/sharded/global.dart';
 import 'package:flutter/material.dart';
-import 'package:e_skate/sharded/global.dart' as globals;
 
 class SkateHorizontalList extends StatelessWidget {
   final Stream<QuerySnapshot<Object?>> skates;
-  const SkateHorizontalList({super.key, required this.skates});
+  final String libelle;
+  final String emptyCaseString;
+  const SkateHorizontalList(
+      {super.key,
+      required this.skates,
+      required this.emptyCaseString,
+      required this.libelle});
 
   @override
   Widget build(BuildContext context) {
-    return StreamBuilder<QuerySnapshot>(
-        stream: skates,
-        builder: (context, snapshot) {
-          if (!snapshot.hasData) {
-            return const LinearProgressIndicator(
-              color: Color(0xffFF914D),
-            );
-          }
-          if (snapshot.data!.docs.isEmpty) {
-            return const SizedBox(
-              height: 100,
-              child: Center(
-                child: Text(
-                  'The skates you like will appear here.',
-                  style: TextStyle(color: Colors.grey),
-                ),
-              ),
-            );
-          }
-          // List likedSkateList = [];
-          List likedSkateList = listSkateIcon(
-              context,
-              snapshot.data?.docs
-                  .map((skate) => Skate.fromSnapshot(skate))
-                  .toList());
-          return Container(
-              margin: const EdgeInsets.only(top: 15, left: 20),
-              child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const Text('Loved ones',
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold, fontSize: 20)),
-                    SizedBox(
+    return Container(
+      margin: const EdgeInsets.all(20),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(libelle,
+              style:
+                  const TextStyle(fontWeight: FontWeight.bold, fontSize: 20)),
+          StreamBuilder<QuerySnapshot>(
+              stream: skates,
+              builder: (context, snapshot) {
+                if (!snapshot.hasData) {
+                  return const LinearProgressIndicator(
+                    color: Color(0xffFF914D),
+                  );
+                }
+                if (snapshot.data!.docs.isEmpty) {
+                  return SizedBox(
+                    height: 100,
+                    child: Center(
+                      child: Text(
+                        emptyCaseString,
+                        style: const TextStyle(color: Colors.grey),
+                      ),
+                    ),
+                  );
+                }
+                List likedSkateList = listSkateIcon(
+                    context,
+                    snapshot.data?.docs
+                        .map((skate) => Skate.fromSnapshot(skate))
+                        .toList());
+                return Container(
+                    margin: const EdgeInsets.only(top: 15),
+                    child: SizedBox(
                       height: 100,
                       child: ListView.builder(
                         scrollDirection: Axis.horizontal,
@@ -53,9 +59,11 @@ class SkateHorizontalList extends StatelessWidget {
                           return likedSkateList[index];
                         },
                       ),
-                    )
-                  ]));
-        });
+                    ));
+              }),
+        ],
+      ),
+    );
   }
 
   List<Widget> listSkateIcon(BuildContext context, List<Skate>? listSkate) {
@@ -85,11 +93,13 @@ class SkateHorizontalList extends StatelessWidget {
                 width: 92,
                 child: InkWell(
                   onTap: () => {
-                    Navigator.of(context).push(MaterialPageRoute(
-                        builder: (BuildContext context) {
-                          return DetailsPage(skate: skate);
-                        },
-                        fullscreenDialog: true))
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                          builder: (BuildContext context) {
+                            return DetailsPage(skate: skate);
+                          },
+                          fullscreenDialog: true),
+                    )
                   },
                 ),
               ),

@@ -48,32 +48,9 @@ class _ProfileState extends State<Profile> {
             ),
           ],
         ),
+        LikedSkateList_GetUser("owned"),
         const SizedBox(height: 20),
-        Container(
-          margin: const EdgeInsets.only(left: 20),
-          child: const Text('My Skates',
-              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20)),
-        ),
-        const SizedBox(
-          height: 100,
-          child: Center(
-            child: Text(
-              'The skates you own will appear here',
-              style: TextStyle(color: Colors.grey),
-            ),
-          ),
-        ),
-        const SizedBox(height: 20),
-        LikedSkateList_GetUser(),
-        // const SizedBox(
-        //   height: 100,
-        //   child: Center(
-        //     child: Text(
-        //       'The skates you like will appear here.',
-        //       style: TextStyle(color: Colors.grey),
-        //     ),
-        //   ),
-        // ),
+        LikedSkateList_GetUser("liked"),
       ],
     );
   }
@@ -83,7 +60,7 @@ class _ProfileState extends State<Profile> {
     auth.logOut();
   }
 
-  Widget LikedSkateList_GetUser() {
+  Widget LikedSkateList_GetUser(String typeList) {
     return StreamBuilder<User?>(
         stream: FirebaseAuth.instance.authStateChanges(),
         builder: (context, snapshot) {
@@ -92,15 +69,31 @@ class _ProfileState extends State<Profile> {
               color: Color(0xffFF914D),
             );
           }
-          return LikedSkateList(snapshot.data);
+          if (typeList == "liked") {
+            return LikedSkateList(snapshot.data);
+          } else {
+            return LovedSkateList(snapshot.data);
+          }
         });
   }
 
   Widget LikedSkateList(User? currentUser) {
     DataRepository repository = DataRepository();
     return SkateHorizontalList(
+        libelle: 'Loved Ones',
+        emptyCaseString: 'The skates you like will appear here.',
         skates: repository.skates
             .where('likes', arrayContains: currentUser!.uid)
+            .snapshots());
+  }
+
+  Widget LovedSkateList(User? currentUser) {
+    DataRepository repository = DataRepository();
+    return SkateHorizontalList(
+        libelle: 'My Skates',
+        emptyCaseString: 'The skates you own will appear here',
+        skates: repository.skates
+            .where('owners', arrayContains: currentUser!.uid)
             .snapshots());
   }
 }

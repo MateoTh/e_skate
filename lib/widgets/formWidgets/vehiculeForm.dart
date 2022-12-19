@@ -15,8 +15,6 @@ class _VehiculeFormState extends State<VehiculeForm> {
     return ListView(children: [
       filterListTile(context, 'Skateboards', 'skateboard',
           const Icon(Icons.skateboarding)),
-      filterListTile(context, 'OneWeels', 'oneWeel', const Icon(Icons.circle)),
-      filterListTile(context, 'Unicyles', 'unicyle', const Icon(Icons.circle)),
       filterListTile(
           context, 'Scooters', 'scooter', const Icon(Icons.electric_scooter)),
       filterListTile(context, 'Bikes', 'bike', const Icon(Icons.electric_bike)),
